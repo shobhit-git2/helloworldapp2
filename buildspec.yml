@@ -3,11 +3,11 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: openjdk8
+      java: corretto11
   pre_build:
     commands:
       - echo Just listing basic information about the environment
-      - which mvn
+      # which mvn
       - mvn -version
       - pwd
   build:
