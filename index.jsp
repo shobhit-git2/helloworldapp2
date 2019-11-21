@@ -5,7 +5,7 @@
 <head>
 	<!-- <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> -->
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Welcome to my application!</title>
+	<title>Welcome to my 2nd application!</title>
 	
 	<!-- Bootstrap itself -->
 	<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
