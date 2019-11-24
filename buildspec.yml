@@ -1,35 +1,41 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      java: corretto11
+  #install:
+   # runtime-versions:
+    #  java: corretto11
   pre_build:
     commands:
-      - echo Just listing basic information about the environment
+      #- echo Just listing basic information about the environment
+      -echo logging in docker images
       # which mvn
+      docker login -u shobhitdockeribm -p lastweek123
       - mvn -version
       - pwd
   build:
     commands:
       - echo Build started on `date`
-      - mvn package
+      mvn package
+      docker build -t helloworldwebapp:v1 -f HelloWorldDockerfile .
+      docker tag helloworldwebapp:v1 shobhitdockeribm/helloworldwebapp:v1
+      #- mvn package
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Working on creating the tar ball with the WAR and AppSpec file for CodeDeploy
-      - mkdir appfiles
-      - cd appfiles
-      - cp ../target/HelloWorld-2.war .
-      - cp ../appspec.yml .
-      - ls -al
-      - tar -zcvf ../target/HelloWorld2.tar.gz *.*
-      - cd ..
+      docker push shobhitdockeribm/helloworldwebapp:v1
+      #- mkdir appfiles
+      #- cd appfiles
+      #- cp ../target/HelloWorld-2.war .
+      #- cp ../appspec.yml .
+      #- ls -al
+      #- tar -zcvf ../target/HelloWorld2.tar.gz *.*
+      #- cd ..
 artifacts:
   files:
 # IMPORTANT
 # You have to use the tar.gz if you are manually executing CodeDeploy
-    - target/HelloWorld2.tar.gz
+    #- target/HelloWorld2.tar.gz
 # Use the individual files if you are using the CodeDeploy from CodePipeline
 # Reason is pipeline does not untar and errors out saying that the appspec file is not there
 #    - appfiles/appspec.yml
